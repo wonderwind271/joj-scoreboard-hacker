@@ -1,5 +1,5 @@
 # joj-scoreboard-hacker
-A tool to get scoreboard for a homework on [joj](https://github.com/joint-online-judge/) even if TA closed the scoreboard.
+A tool to get scoreboard for a homework on [joj](https://joj.sjtu.edu.cn/) even if TA closed the scoreboard.
 
 
 
