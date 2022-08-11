@@ -23,6 +23,10 @@ if sel[2] == '1':
     all_id += id_2020.read().split('\n')
 if sel[3] == '1':
     all_id += id_2021.read().split('\n')
+id_2020.close()
+id_2021.close()
+id_2019.close()
+id_2018.close()
 data = []
 for stud_id in all_id:
     (case_num, AC_count, score, state, username) = quire(stud_id, base_url, assignment, problem)
