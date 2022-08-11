@@ -33,3 +33,17 @@ def id_store(all_stud_id, base_url):
     for line in namelist:
         fp.write(line+"\n")
     fp.close()
+
+
+def id_load(base_url):
+    folder = "local/" + fit_url(base_url)
+    file_name = folder + "/namelist.txt"
+    if os.path.isfile(file_name):
+        fp = open(file_name, 'r')
+        names = fp.read().split("\n")
+        if len(names):
+            if (names[-1] == ""):
+                names.pop()
+        return names
+    else:
+        return []

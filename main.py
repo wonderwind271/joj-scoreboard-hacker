@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from unit_quire import *
+from local_file import *
 import pandas as pd
 
 base_url = input("please input the main page url of the course, for example, "
@@ -27,19 +28,30 @@ id_2020.close()
 id_2021.close()
 id_2019.close()
 id_2018.close()
+sel = input("please input if you want to also use previous data: ")
+if sel:
+    all_id += id_load(base_url)
+    all_id = list(set(all_id))
+
+all_id.sort()
 data = []
+save_id = []
 for stud_id in all_id:
     (case_num, AC_count, score, state, username) = quire(stud_id, base_url, assignment, problem)
     if state == 3:
         print(f"student {stud_id} {username}: total case: {case_num}, accepted case: {AC_count}, score: {score}")
         data.append([stud_id, username, case_num, AC_count, score])
+        save_id.append(stud_id)
     elif state == 1:
         print(f"student {stud_id} {username}: compile error")
         data.append([stud_id, username, "compile error", 0, 0])
+        save_id.append(stud_id)
+id_store(save_id, base_url)
+
 df = pd.DataFrame(data, index=range(1, len(data) + 1), columns=["sjtu id", "name", "total case", "AC case", "score"])
 output_filename = input("please enter the csv name. Empty means abort. No need to add .csv: ")
 if output_filename != "":
-    df.to_csv(output_filename+".csv")
+    df.to_csv("local/" + fit_url(base_url)+"/"+output_filename+".csv")
     print("data exported to "+output_filename+".csv")
 else:
     print("data not exported")

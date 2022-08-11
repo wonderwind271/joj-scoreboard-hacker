@@ -11,7 +11,7 @@ def quire(stud_id, base_url, assignment, problem):
     :return: a tuple (case_num, AC_count, score, state, name), state 1: Compile error, 2: not found, 3: get score
     '''
     # start search process
-    url = base_url + "records?uid_or_name=" + str(stud_id) + "&pid="+problem+"&tid=" + assignment
+    url = base_url + "records?uid_or_name=" + str(stud_id) + "&pid=" + problem + "&tid=" + assignment
     r = requests.get(url)  # can use param, but let's be straightforward here
     res1 = str(r.content)
     place1 = res1.find("data-rid")  # place==-1 means id not found. will be tackled later
@@ -25,12 +25,12 @@ def quire(stud_id, base_url, assignment, problem):
     # get username
     username = ""
     place_user_label = res2.find("user-profile-name")
-    if place_user_label>=0:
+    if place_user_label >= 0:
         l1 = res2.find(">", place_user_label)
         l2 = res2.find("<", l1)
-        username = res2[l1+1:l2]
+        username = res2[l1 + 1:l2]
     # count ac and all results. if "Compile Error" is found, get 0 directly
-    if(res2.count("Compile Error")):
+    if (res2.count("Compile Error")):
         # print("compile error")
         return (0, 0, 0, 1, username)
     AC_count = res2.count("icon pass")
