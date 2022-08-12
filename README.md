@@ -40,7 +40,17 @@ Next, the program will ask you to enter the database of students.
 please input the selection of students, in 18, 19, 20, 21 entry, for example, 0011 means choose 20 and 21 entry: 1110
 ```
 
-Here, the input format is always $$a_1a_2a_3a_4$$, where $$a_i=0 \text{ or } 1$$ for $$i=1,2,3,4$$. When $$a_i=1$$, the corresponding grade (年级) of student is selected. For example, when we enter "1110" here, the student in 2018, 2019, 2020 entry are selected.
+Here, the input format is always $a_1a_2a_3a_4$, where $a_i=0 \text{ or } 1$ for $i=1,2,3,4$. When $a_i=1$, the corresponding grade (年级) of student is selected. For example, when we enter "1110" here, the student in 2018, 2019, 2020 entry are selected.
+
+The program will further ask you if you want to also use previous data for this course.
+
+```
+please input if you want to also use previous data: 1
+```
+
+The program always keep a name list of all the students that appears in this course at least once from previous run of this course. If you choose "1" here, the database we choose is the **union** of what you choose (selection of students previously by "1110") and all the students that appear in the previous run. 
+
+
 
 The program will then start to give students' score in this homework.
 
@@ -74,12 +84,24 @@ If you do not want the csv, just enter an empty line, and the csv will not be ge
 
 
 
+## About the namelist function
+
+As is described above, the program will always keep a namelist of all the students that appears in this course at least once. This function can greatly reduce the amount of time, because if we run full test, the program will send request to joj server for all the students, not only for the students in the course.
+
+By entering "0000" when selecting the database, and enter "1" to use the namelist, you can run all the students that appeared before. This will save a lot of time and miss at most 2-5 students.
+
+For a typical "5 project" course (like VE280 SU22 and FA21), I suggest you run full test (enter "1110" for database selection) for the p1 and p2. Then just use the namelist (enter "0000" for the database and "1" for using previous data). That's because it's unlikely that a student miss the first 2 project (relatively easy) but do the projects later.
+
+For the course that involves using joj for exam, you can run full test for the first problem of the exam, and always just use the namelist for all the rest assignments and exams. That's because it's likely that everyone take part in the exam.
+
+
+
 ## further notice
 
 The speed is subject to your internet speed and joj server's respond speed. It's not related to your CPU.
 
-The principle of this program is to take advantage of joj's "recent submission" function, and try each student in the database.
+The principle of this program is to take advantage of joj's "recent submission" function, and try each student in the database if you do not use namelist function.
 
 Do not abuse it since it may burden the joj server.
 
-Also, it seems that the joj will be upgraded. I'm not sure if this will still work at that time.
+Also, it seems that the joj will be upgraded to 2.0. I'm not sure if this program will still work at that time.
